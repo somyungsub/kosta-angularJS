@@ -1,0 +1,6 @@
+<!-- selectHero가 존재 할때만 선택된 hero의 상세정보를 출력하기 ngIf Driective 사요-->
+<div *ngIf="hero">
+  <h2>{{hero.name | uppercase}}</h2>
+  <div><span>ID: </span>{{hero.id}}</div>
+  <div><label>Name: <input type="text" placeholder="name" [(ngModel)]="hero.name"></label></div>
+</div>
