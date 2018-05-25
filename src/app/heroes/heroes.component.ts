@@ -26,12 +26,27 @@ export class HeroesComponent implements OnInit, OnDestroy {
     console.log('ngOnDestroy 메서드 호출');
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
+  // onSelect(hero: Hero): void {
+  //   this.selectedHero = hero;
+  // }
   getHeroes(): void {
     // this.heroes = this.heroService.getHeros();
     // this.heroService.getHeros().subscribe(heroes => this.heroes = heroes);
     this.heroService.getHeros().subscribe(res => this.heroes = res);
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.heroService.addHero({name} as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
   }
 }
